@@ -1,0 +1,47 @@
+== 2026-11-25T11:53:20Z P: release + PROFILE=1
+Start profiling.
+
+window 1323.6 ms, GPU busy 1277.6 ms (97 %), per step /60: window 22.06 ms, busy 21.29 ms
+  moe_marlin            7.81 ms/step  (35.4 % of window)  n=197/step
+  roce                  6.29 ms/step  (28.5 % of window)  n=188/step
+  gemm                  4.47 ms/step  (20.2 % of window)  n=265/step
+  other                 2.05 ms/step  ( 9.3 % of window)  n=515/step
+  attention             0.74 ms/step  ( 3.3 % of window)  n=202/step
+  norm/elementwise      0.71 ms/step  ( 3.2 % of window)  n=242/step
+  lm_head/sampling      0.03 ms/step  ( 0.1 % of window)  n=4/step
+top kernels (sum of durations per step):
+    5.240 ms  [roce] kernel_cutlass_kernel_b12xcommroce_oneshot_cute_RoceOneshotLaunch_object_at__ptri32gmemali
+    4.109 ms  [moe_marlin] void sglang::marlin_moe_gemv::marlin_gemv<true, 2304, 2304, 1, 8>(__nv_bfloat16 const*, un
+    2.121 ms  [moe_marlin] void sglang::marlin_moe_gemv::marlin_gemv<true, 2304, 1152, 1, 8>(__nv_bfloat16 const*, un
+    1.415 ms  [gemm] void dsk::(anonymous namespace)::k_gemv16<2, 2, false, false>(__nv_bfloat16 const*, int, u
+    1.065 ms  [moe_marlin] void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 2814749767172868l, 1125899906909960
+    0.861 ms  [gemm] kernel_cutlass_kernel_sglangkernelsopslayernorminkling2_rms_normRMSNormFwd_object_at__tens
+    0.812 ms  [gemm] void dsk::(anonymous namespace)::k_gemv16x_range<1>(int, int, int, __nv_bfloat16 const*, i
+    0.712 ms  [gemm] void dsk::(anonymous namespace)::k_gemv16<2, 1, false, false>(__nv_bfloat16 const*, int, u
+    0.682 ms  [attention] kernel_cutlass_kernel_sglangkernelsopsattentioninkling2_attn_resAttnResFwdKernel_object_at
+    0.666 ms  [other] _controller_mix
+    0.386 ms  [roce] kernel_cutlass_kernel_b12xcommroce_allgather_cute_RoceAllGatherLaunch_object_at__ptri32gme
+    0.383 ms  [other] _controller_down
+    0.350 ms  [gemm] void dsk::(anonymous namespace)::k_gemv16x_range_r16<1>(int, int, int, __nv_bfloat16 const
+    0.341 ms  [roce] kernel_cutlass_kernel_flashinfergemmkernelsdense_blockscaled_gemm_sm120_b12xDenseGemmKerne
+    0.324 ms  [roce] kernel_cutlass_kernel_b12xgemmbf16_gemv_kernelSmallNGemvKernel_object_at__tensorptrbf16gme
+    0.322 ms  [other] _combine_gate_sink_kernel
+    0.305 ms  [gemm] void (anonymous namespace)::k_w8gemv<1, 2, 4, 2, false>(__nv_bfloat16 const*, int, int, un
+    0.287 ms  [gemm] void cutlass::Kernel2<cutlass_80_wmma_tensorop_bf16_s161616gemm_bf16_16x16_128x2_tn_align8
+    0.271 ms  [moe_marlin] void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l
+    0.221 ms  [other] _decode_partials
+    0.197 ms  [other] void sglang::inkling2_prologue::prologue_kernel<6, 2, 3, 1024, 4, false, false, false, __n
+    0.183 ms  [norm/elementwise] _controller_norm
+    0.182 ms  [other] _w8_mm_kernel
+    0.149 ms  [norm/elementwise] void sglang::inkling2_sconv::sconv_kernel<4, 1, false, false, true, true, 1, float, __nv_b
+    0.142 ms  [moe_marlin] _route_metadata
+== 2026-11-25T11:57:49Z AnoGate: INKLING_ATTN=prefill_swa,prefill_global INKLING_ATTN_GATE=0
+RESULT AnoGate tok/s 141.50 tps 3.029 short-tps 2.972 step 22.36
+RESULT AnoGate tf {"tokens": 15680, "mean_abs_dlogprob": 0.57283, "p99": 7.1072, "max": 21.5302, "nll_per_tok_A": 2.53716, "nll_per_tok_B": 2.54365}
+== 2026-11-25T12:01:58Z AswaNoGate: INKLING_ATTN=prefill_swa INKLING_ATTN_GATE=0
+RESULT AswaNoGate tok/s 139.94 tps 3.212 short-tps 3.212 step 23.43
+RESULT AswaNoGate tf {"tokens": 15680, "mean_abs_dlogprob": 0.6002, "p99": 7.6597, "max": 22.0419, "nll_per_tok_A": 2.53716, "nll_per_tok_B": 2.55322}
+== 2026-11-25T12:06:17Z AgateAll: INKLING_ATTN=prefill_swa,prefill_global INKLING_ATTN_GATE=all
+RESULT AgateAll tok/s 140.81 tps 3.059 short-tps 3.000 step 22.41
+RESULT AgateAll tf {"tokens": 15680, "mean_abs_dlogprob": 0.57302, "p99": 7.1072, "max": 21.5285, "nll_per_tok_A": 2.53716, "nll_per_tok_B": 2.54294}
+CHAIN DONE 2026-11-25T12:10:35Z

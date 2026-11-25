@@ -1,0 +1,13 @@
+== 2026-11-25T12:33:49Z C1: cap dfpolicy rowscale 1.0, TP_SYNC=check
+RESULT C1 attached: 4 differ: 0 errors: 0
+[inkling-vcap] DFLASH attached: tp=4 tp_sync=check mode=dfpolicy:/opt/inkling-overlay/inkling_vcap/policies/df-SLDF2x.json min=1 max=width bsmax=8 remap=on fused=on union=off log_every=0 capping=on block_verification=on bv_mask=on fused_remap=on (self-check passed) stride=8 capacity=48 top_k=16 moe_layers=24 steplog_run=-; patched: Inkling2MoE.forward, Inkling2Gate.forward, DFlashWorkerV2.__init__, DFlashWorkerV2._stage_draft_sampler, DFlashWorkerV2._plan_verify, DFlashWorkerV2._accept_block, DFlashWorkerV2.forward_batch_generation, DFlashWorkerV2._selector_sampling_accept, selector.sample_path (instance)
+== 2026-11-25T12:41:56Z C2: cap rowscale 0.5
+== 2026-11-25T12:49:41Z X1: fixed:4 REMAP=1 (exactness)
+30 prompts x 256 tokens at c1
+30 prompts x 256 tokens at c4
+== 2026-11-25T12:55:19Z X0: fixed:4 REMAP=0
+30 prompts x 256 tokens at c1
+30 prompts x 256 tokens at c4
+RESULT remap c1 {"prompts": 30, "identical": 19, "median_common_prefix": 256, "tokens_compared": 6061, "mean_abs_dlogprob": 0.00217, "p99": 0.0274, "max": 0.1872, "divergence_chosen_lp_gaps": [0.007, 0.003, 0.0, 0.005, 0.004, 0.041, 0.009, 0.002, 0.006, 0.007, 0.062]}
+RESULT remap c4 {"prompts": 30, "identical": 8, "median_common_prefix": 125, "tokens_compared": 4420, "mean_abs_dlogprob": 0.0075, "p99": 0.1446, "max": 0.3955, "divergence_chosen_lp_gaps": [0.48, 0.024, 0.147, 0.112, 0.04, 0.054, 0.025, 0.02, 0.043, 0.058, 0.033, 0.039, 0.021, 0.011, 0.016, 0.029, 0.001, 0.099, 0.48, 0.045, 0.17, 0.113]}
+CHAIN DONE 2026-11-25T13:01:12Z

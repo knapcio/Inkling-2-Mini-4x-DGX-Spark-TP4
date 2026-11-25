@@ -1,0 +1,81 @@
+tp4_dflash2_prepatch: per-shard vocabulary clamp -> /tmp/dflash2_patch_tp.py
+[
+  {
+    "file": "srt/models/inkling2.py",
+    "before_sha256": "9ea6d367689bda2e90722a06bbb67cee584c7e60ed36ee30c174b10a4dfdd1f2",
+    "after_sha256": "619e6fedaf90b06001293e69abd85cce6d8ef8ab9ec71c9b015d7bd33f756be1"
+  },
+  {
+    "file": "srt/configs/inkling2.py",
+    "before_sha256": "fcc26fdbd0904b3de4aecf7bd8da658d768b3a51dfdf32a23881c9602d895882",
+    "after_sha256": "ece18b1d412a14ae619ff981839ba91a15a18b94fc1448422a8fd241b751287c"
+  },
+  {
+    "file": "srt/model_executor/model_runner_components/spec_aux_hidden_state.py",
+    "before_sha256": "a0c10b08ffe3f20da0bc1be3b88f21adc72f2d2b9f751fc58774472c12b24146",
+    "after_sha256": "cea241cedc56fc7b14baa324def308efcb4cba512dd748ad6a108ecc408e7ae0"
+  },
+  {
+    "file": "srt/models/dflash.py",
+    "before_sha256": "04166df791cc46153164be31b62af448ddcb684f887dcc3a758ec77c587e0fc3",
+    "after_sha256": "0a5b7ed55e3144d5e9e3ff0a6882e204ca60cefa4e73465b7d3cce6fe4ddf6eb"
+  },
+  {
+    "file": "srt/speculative/dflash_worker_v2.py",
+    "before_sha256": "07b2f8a369ee62f14b1b31123537fb4b1cead667c5c6b6dcbc801677431d99cf",
+    "after_sha256": "c23c6ef97e5e305e53e8448a71d9fd1d0987a010faf99ab8b24e945aeecfac65"
+  }
+]
+/sgl-workspace/sglang/python/sglang/launch_server.py:56: UserWarning: 'python -m sglang.launch_server' is still supported, but 'sglang serve' is the recommended entrypoint.
+  Example: sglang serve --model-path <model> [options]
+  warnings.warn(
+[2026-11-25 08:53:46] muse_vr_plugin: sgl_compat engaged=False pid=1 layout=main reason=no component enabled
+[2026-11-25 08:53:47] muse_vr_plugin: warp_redux_volatile engaged=False pid=1 reason=the installed warp.cuh already carries the fix
+[2026-11-25 08:53:50] Multimodal is disabled for inkling2_loop. To enable it, set --enable-multimodal.
+[2026-11-25 08:53:50] inkling2 quantization is not fully optimized yet. The speed can be slower than non-quantized models.
+[2026-11-25 08:53:50] Hybrid SWA model detected. architectures=['Inkling2LoopForConditionalGeneration']
+[2026-11-25 08:53:50] cuda_graph_config[prefill].backend='full' is experimental. Use breakable for production workloads.
+[2026-11-25 08:53:50] Failed to get GPU memory capacity from nvidia-smi. Falling back to torch.cuda.mem_get_info(). Reported total GPU memory per device (MiB): [124610], using min: 124610 MiB.
+[2026-11-25 08:53:52] DFLASH draft KV ring: on.
+[2026-11-25 08:53:59] muse_vr_plugin: sgl_compat engaged=False pid=76 layout=main reason=no component enabled
+[2026-11-25 08:53:59] muse_vr_plugin: warp_redux_volatile engaged=False pid=76 reason=the installed warp.cuh already carries the fix
+[2026-11-25 08:53:59 TP1 EP1 PID76] Multimodal is disabled for inkling2_loop. To enable it, set --enable-multimodal.
+[2026-11-25 08:53:59 TP1 EP1 PID76] inkling2 quantization is not fully optimized yet. The speed can be slower than non-quantized models.
+[2026-11-25 08:53:59 TP1 EP1 PID76] Init parallel begin.
+[2026-11-25 08:54:00 TP1 EP1 PID76] Found nccl from environment variable SGLANG_NCCL_SO_PATH=/opt/nccl/libnccl.so.2.30.7
+[2026-11-25 08:54:02 TP1 EP1 PID76] INKLING_ROCE_READY rank=1 world=4 api=plan hcas=rocep1s0f0,roceP2p1s0f0 all_reduce_max=2097152 all_gather_max=16777216 spin_limit=300000000 {"bytes_posted_per_hca": [624, 624], "ctrl_seq": 3, "epoch": 3, "error_hca": 0, "error_peer": 0, "error_seq": 0, "hcas": ["rocep1s0f0", "roceP2p1s0f0"], "last_seq": 3, "max_gather_bytes": 16777216, "max_size": 2097152, "ops_posted": 3, "rails": 2, "rank": 1, "routes": [[[0, 0], [1, 1]], [], [[0, 0], [1, 1]], [[0, 0], [1, 1]]], "slot_bytes": 16777216, "spin_limit": 300000000, "world_size": 4, "writes_completed": 18, "writes_completed_per_hca": [9, 9]}
+[2026-11-25 08:54:02 TP1 EP1 PID76] Init parallel ends. elapsed=3.13 s
+[2026-11-25 08:54:06 TP1 EP1 PID76] Multimodal is disabled for inkling2_loop. To enable it, set --enable-multimodal.
+[2026-11-25 08:54:06 TP1 EP1 PID76] inkling2 quantization is not fully optimized yet. The speed can be slower than non-quantized models.
+[2026-11-25 08:54:07 TP1 EP1 PID76] Memory baseline taken. mem usage=-0.00 GB
+[2026-11-25 08:54:10 TP1 EP1 PID76] Load weight begin. avail mem=114.07 GB
+[2026-11-25 08:54:10 TP1 EP1 PID76] multimem all-gather disabled because the TP group spans nodes outside one NVLink clique.
+[2026-11-25 08:54:30 TP1 EP1 PID76] INKLING_ROCE_ROUTE all_gather rank=1 first shard=(1, 100512) bfloat16 dim=0
+[2026-11-25 08:54:33 TP1 EP1 PID76] Load weight end. elapsed=22.90 s, type=Inkling2LoopForConditionalGeneration, quant=inkling2, avail mem=108.35 GB, mem usage=5.71 GB.
+[2026-11-25 08:54:38 TP1 EP1 PID76] Memory baseline taken. mem usage=0.00 GB
+[2026-11-25 08:54:38 TP1 EP1 PID76] Load weight begin. avail mem=108.12 GB
+[2026-11-25 08:54:39 TP1 EP1 PID76] Load weight end. elapsed=0.94 s, type=DFlash2DraftModel, avail mem=106.33 GB, mem usage=1.80 GB.
+[2026-11-25 08:54:39 TP1 EP1 PID76] DFLASH draft KV ring: 113024 rows, 0.54 GB charged to the KV budget.
+[2026-11-25 08:54:39 TP1 EP1 PID76] Use sliding window memory pool. full_layer_tokens=8431616, swa_layer_tokens=421504
+[2026-11-25 08:54:39 TP1 EP1 PID76] Mamba Cache is allocated. max_mamba_cache_size: 512, conv_state size: 0.77GB, ssm_state size: 0.00GB intermediate_ssm_state_cache size: 0.00GB intermediate_conv_window_cache size: 0.59GB 
+[2026-11-25 08:54:39 TP1 EP1 PID76] Warmed fused Mamba slot copy kernel in 275.182 ms
+[2026-11-25 08:54:42 TP1 EP1 PID76] Full KV Cache is allocated. dtype: torch.bfloat16, #tokens: 8431616, K size: 32.16 GB, V size: 32.16 GB
+[2026-11-25 08:54:42 TP1 EP1 PID76] SWA KV Cache is allocated. dtype: torch.bfloat16, #tokens: 421504, K size: 8.04 GB, V size: 8.04 GB
+[2026-11-25 08:54:42 TP1 EP1 PID76] SWAKVPool mem usage: 80.41 GB, swa size: 421504, full size: 8431616
+[2026-11-25 08:54:42 TP1 EP1 PID76] Memory pool end. avail mem=23.48 GB
+[2026-11-25 08:54:42 TP1 EP1 PID76] KV Cache is allocated. dtype: torch.bfloat16, #tokens: 113024, K size: 0.27 GB, V size: 0.27 GB
+[2026-11-25 08:54:42 TP1 EP1 PID76] Memory pool end. avail mem=23.96 GB
+[2026-11-25 08:54:43 TP1 EP1 PID76] Overriding draft attention backend to fa4.
+[2026-11-25 08:54:43 TP1 EP1 PID76] Capture target prefill CUDA graph begin. backend=full, num_tokens=[4, 8, 12, 16, 20, 24, 28, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240, 256, 288, 320, 352, 384, 416, 448, 480, 512, 576, 640, 704, 768, 832, 896, 960, 1024, 1280, 1536, 1792, 2048, 2304, 2560, 2816, 3072, 3328, 3584, 3840, 4096, 4608, 5120, 5632, 6144, 6656, 7168, 7680, 8192], avail mem=23.32 GB
+[2026-11-25 08:55:29 TP1 EP1 PID76] INKLING_ROCE_ROUTE all_reduce rank=1 first=2064384 bytes (bfloat16); NCCL above 2097152 bytes
+[2026-11-25 08:55:36 TP1 EP1 PID76] Capture target prefill CUDA graph end. elapsed=53.03 s, mem usage=5.50 GB, avail mem=17.82 GB.
+[2026-11-25 08:55:36 TP1 EP1 PID76] Capture target verify CUDA graph begin. backend=full, num_tokens_per_req=8, avail mem=17.82 GB
+[2026-11-25 08:55:41 TP1 EP1 PID76] Capture target verify CUDA graph end. bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 40, 44, 48], elapsed=5.05 s, mem usage=0.95 GB, avail mem=16.88 GB.
+[2026-11-25 08:55:41 TP1 EP1 PID76] Capture draft verify CUDA graph begin. backend=full, num_tokens_per_req=8, avail mem=16.88 GB
+[2026-11-25 08:55:41 TP1 EP1 PID76] Draft metadata glue graph off: the attention backend declares no host-free draft prep.
+[2026-11-25 08:55:44 TP1 EP1 PID76] Capture draft verify CUDA graph end. bs=[1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 40, 44, 48], elapsed=2.71 s, mem usage=0.74 GB, avail mem=16.14 GB.
+[2026-11-25 08:55:44 TP1 EP1 PID76] DFLASH sampling pre-warm: borrowing=False bs=48 peak=646796288 B headroom=955569152 B
+[2026-11-25 08:55:44 TP1 EP1 PID76] Init Unified Radix Cache. Components: (<ComponentType.FULL: 0>, <ComponentType.SWA: 1>, <ComponentType.MAMBA: 2>). Tree Core: RustUnifiedTreeCore
+[2026-11-25 08:55:44 TP1 EP1 PID76] Tree cache initialized: source=default impl=UnifiedRadixCache hybrid_swa=True hybrid_ssm=True hicache_attached=False
+[2026-11-25 08:55:45] Dummy health check server started in background thread at 127.0.0.1:8000
+[2026-11-25 08:55:47 TP1 EP1 PID76] INKLING_ROCE_HEALTH rank=1 first guarded step ok

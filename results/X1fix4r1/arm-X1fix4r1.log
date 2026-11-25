@@ -1,0 +1,28 @@
+ARM X1fix4r1 start 2026-11-25T12:49:41Z env: INKLING_VERIFY_CAP=fixed:4 INKLING_VERIFY_CAP_LOG_EVERY=0 INKLING_VERIFY_CAP_BV=mask INKLING_VERIFY_CAP_REMAP=1  flags: 
+stopped inkling-tp4 on all ranks
+overlay 0f4284106203981d on all nodes
+proxy present: /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+INKLING_TP4_ROCE preflight: b12x /opt/sglang/lib/python3.12/site-packages/flashinfer/experimental/b12x/comm/roce/__init__.py API 1 proxy /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so ABI 5
+INKLING_TP4_ROCE preflight: ok
+proxy present: /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+INKLING_TP4_ROCE preflight: b12x /opt/sglang/lib/python3.12/site-packages/flashinfer/experimental/b12x/comm/roce/__init__.py API 1 proxy /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so ABI 5
+INKLING_TP4_ROCE preflight: ok
+proxy present: /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+INKLING_TP4_ROCE preflight: b12x /opt/sglang/lib/python3.12/site-packages/flashinfer/experimental/b12x/comm/roce/__init__.py API 1 proxy /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so ABI 5
+INKLING_TP4_ROCE preflight: ok
+proxy present: /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+INKLING_TP4_ROCE preflight: b12x /opt/sglang/lib/python3.12/site-packages/flashinfer/experimental/b12x/comm/roce/__init__.py API 1 proxy /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so ABI 5
+INKLING_TP4_ROCE preflight: ok
+roce bb81efad1fbb9078 on all nodes
+rank environments identical (5facf9756c152eb7)
+started inkling-tp4 on 4 ranks (run inkling-tp4-20261125135048-3689351); API on 127.0.0.1:8000 of rank 0 once ready (docker logs -f inkling-tp4-r0)
+PASS X1fix4r1-repro "geomean_tok_s": 137.38
+ARM X1fix4r1 DONE 2026-11-25T12:53:53Z

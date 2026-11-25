@@ -1,0 +1,78 @@
+diff --git a/python/sglang/kernels/ops/speculative/dspark/markov_sample.py b/python/sglang/kernels/ops/speculative/dspark/markov_sample.py
+index 3b6c5922e95a..cd61a9be0b72 100644
+--- a/python/sglang/kernels/ops/speculative/dspark/markov_sample.py
++++ b/python/sglang/kernels/ops/speculative/dspark/markov_sample.py
+@@ -17,12 +17,20 @@
+ # Measured fastest for 1-64 rows, where the per-block Philox work sets latency.
+ _BLOCK = 1024
+ _NO_INDEX = tl.constexpr(2147483647)
+-# 2**-32: maps a 32-bit Philox word to a uniform in (0, 1].
+ _UNIFORM_SCALE = tl.constexpr(2.3283064365386963e-10)
+ _PHILOX_ROUNDS = 10
+ _ROUND_CODE = {torch.float32: 0, torch.bfloat16: 1, torch.float16: 2}
+ 
+ 
++@triton.jit
++def _exponential_from_philox(bits):
++    # For u = (bits + 0.5) * 2**-32, folding the word before the FP32
++    # conversion retains 1-u even when u would round to 1.
++    lower = bits < 0x80000000
++    folded = (tl.minimum(bits, ~bits).to(tl.float32) + 0.5) * _UNIFORM_SCALE
++    return tl.where(lower, -libdevice.log1p(-folded), -tl.log(folded))
++
++
+ @triton.jit
+ def _round_to_step_dtype(value, ROUND: tl.constexpr):
+     if ROUND == 1:
+@@ -132,9 +140,7 @@ def _select_block(
+             PHILOX_ROUNDS,
+         )
+         bits = tl.interleave(tl.interleave(w0, w2), tl.interleave(w1, w3))
+-        # Small words convert to FP32 exactly, so the winning small noise stays precise.
+-        uniform = (bits.to(tl.float32) + 0.5) * _UNIFORM_SCALE
+-        exp_noise = -libdevice.log1p(-uniform)
++        exp_noise = _exponential_from_philox(bits)
+         key = value / temperature - tl.log(exp_noise)
+     nan = valid & (key != key)
+     has_nan = tl.sum(nan.to(tl.int32), 0) > 0
+@@ -453,8 +459,13 @@ def torch(
+             )
+             words = torch.broadcast_tensors(*words)
+             bits = torch.stack(words, dim=-1).reshape(rows, -1)[:, :padded]
+-            uniform = (bits.float() + 0.5) * _UNIFORM_SCALE.value
+-            exp_noise = -torch.log1p(-uniform)
++            # _philox returns uint32 words stored in int64 tensors.
++            folded = (
++                torch.minimum(bits, 0xFFFFFFFF - bits).float() + 0.5
++            ) * _UNIFORM_SCALE.value
++            exp_noise = torch.where(
++                bits < 0x80000000, -torch.log1p(-folded), -torch.log(folded)
++            )
+             sampled = temperatures != 0
+             safe_temperatures = torch.where(sampled, temperatures, 1.0)[:, None]
+             noised = value / safe_temperatures - torch.log(exp_noise)
+diff --git a/python/sglang/kernels/ops/speculative/dspark/sharded_accept_hip.py b/python/sglang/kernels/ops/speculative/dspark/sharded_accept_hip.py
+index c4b8e1e1a195..e6a958ceed93 100644
+--- a/python/sglang/kernels/ops/speculative/dspark/sharded_accept_hip.py
++++ b/python/sglang/kernels/ops/speculative/dspark/sharded_accept_hip.py
+@@ -16,9 +16,9 @@
+ import torch
+ import triton
+ import triton.language as tl
+-from triton.language.extra import libdevice
+ 
+ from sglang.kernels.ops.speculative.dspark.markov_sample import (
++    _exponential_from_philox,
+     _markov_sample_finish_kernel,
+ )
+ 
+@@ -181,8 +181,7 @@ def _accept_kernel(
+     quad = (part * BLOCK + START) // 4 + tl.arange(0, BLOCK // 4)
+     w0, w1, w2, w3 = _philox(KEY, quad, b, _BONUS_STEP, OFFSET)
+     bits = tl.interleave(tl.interleave(w0, w2), tl.interleave(w1, w3))
+-    # Uniform in (0, 1]: a zero word would give zero noise and win outright.
+-    noise = -libdevice.log1p(-(bits.to(tl.float32) + 0.5) * 2.3283064365386963e-10)
++    noise = _exponential_from_philox(bits)
+     key = tl.where(valid & (mass > 0.0), tl.log(mass) - tl.log(noise), -float("inf"))
+     top = tl.max(key, 0)
+     # 0x7FFFFFFF is the finish kernel's "no candidate", for an all-padding block.

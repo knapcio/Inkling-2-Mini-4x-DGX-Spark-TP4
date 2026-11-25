@@ -1,0 +1,20 @@
+== 2026-11-25T09:33:57+01:00 warm-up
+prose      c1  aggregate    59.9 tok/s  per-stream   61.1  ttft 0.098 s  failed 0
+wrote /home/knapcio/inkling-tp4/results/B1stock/B1stock-warm.json
+== 2026-11-25T09:34:08+01:00 speedbench quick
+B1stock: {"failed": 0, "valid_decode": 30, "ALL": {"n": 30, "median_tok_s": 79.55, "geomean_tok_s": 84.3, "aggregate_tok_s": 80.52, "median_ttft_ms": 92.7, "truncated_frac": 0.967, "reasoning_token_frac": 0.776, "reasoning_char_frac": 0.824, "median_step_ms": 29.19, "median_tokens_per_step": 2.359, "steps_source": "response", "median_accept_rate": 0.1979, "median_draft_per_step": 7.0}, "sentinel": {"n": 2, "identical_text": 2, "drift_pct_identical": 0.352, "drift_pct_all": 0.352}}
+wrote /home/knapcio/inkling-tp4/results/B1stock/B1stock-sbquick.json (1.2 min)
+== 2026-11-25T09:35:20+01:00 decode table
+prose      c1  aggregate    65.3 tok/s  per-stream   66.7  ttft 0.093 s  failed 0
+prose      c4  aggregate   157.8 tok/s  per-stream   43.5  ttft 0.255 s  failed 0
+prose      c16 aggregate   372.4 tok/s  per-stream   24.8  ttft 0.329 s  failed 0
+code       c1  aggregate    78.1 tok/s  per-stream   80.6  ttft 0.115 s  failed 0
+code       c4  aggregate   193.0 tok/s  per-stream   55.1  ttft 0.159 s  failed 0
+code       c16 aggregate   445.7 tok/s  per-stream   30.7  ttft 0.366 s  failed 0
+wrote /home/knapcio/inkling-tp4/results/B1stock/B1stock-decode.json
+| prompt type | c1 | c4 | c16 |
+|---|---:|---:|---:|
+| prose | 66.7 | 157.8 (43.5) | 372.4 (24.8) |
+| code | 80.6 | 193.0 (55.1) | 445.7 (30.7) |
+min MemAvailable GiB r0..r3: 24.41 25.89 26.45 25.56
+== 2026-11-25T09:36:59+01:00 done

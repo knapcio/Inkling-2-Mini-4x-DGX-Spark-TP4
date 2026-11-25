@@ -1,0 +1,13 @@
+{
+ "url": "http://127.0.0.1:8000",
+ "results": [
+  {
+   "check": "needle 240K",
+   "pass": true,
+   "prompt_tokens": 240104,
+   "seconds": 66.7,
+   "expected": "WILLOW-FALCON-3624",
+   "answer": "WILLOW-FALCON-3624"
+  }
+ ]
+}

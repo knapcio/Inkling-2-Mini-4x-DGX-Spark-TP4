@@ -1,0 +1,50 @@
+ARM B5dec start 2026-11-25T09:42:50Z env: INKLING_RSFIX=1 INKLING_DFLASH_BYTES=mx8,mx8w INKLING_DFLASH_PREFIX_TAIL_MAX_INPUT=4096 INKLING_PICO12=dense,lmhead,stack1 INKLING_DFLASH_TAIL_SNAPSHOTS=8 INKLING_DFLASH_PREFIX_TAIL=2048 OVERLAY=1 SPEC=dflash2 INKLING_WIDE_SCOPE=verify INKLING_WIDE=dense,lmhead INKLING_TP4_ROCE=1 INKLING_VATTN=1  flags: --speculative-use-block-verification
+stopped inkling-tp4 on all ranks
+overlay 94dbffcd63cf4818 on all nodes
+proxy present: /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+INKLING_TP4_ROCE preflight: b12x /opt/sglang/lib/python3.12/site-packages/flashinfer/experimental/b12x/comm/roce/__init__.py API 1 proxy /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so ABI 5
+INKLING_TP4_ROCE preflight: ok
+proxy present: /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+INKLING_TP4_ROCE preflight: b12x /opt/sglang/lib/python3.12/site-packages/flashinfer/experimental/b12x/comm/roce/__init__.py API 1 proxy /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so ABI 5
+INKLING_TP4_ROCE preflight: ok
+proxy present: /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+INKLING_TP4_ROCE preflight: b12x /opt/sglang/lib/python3.12/site-packages/flashinfer/experimental/b12x/comm/roce/__init__.py API 1 proxy /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so ABI 5
+INKLING_TP4_ROCE preflight: ok
+proxy present: /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+INKLING_TP4_ROCE preflight: b12x /opt/sglang/lib/python3.12/site-packages/flashinfer/experimental/b12x/comm/roce/__init__.py API 1 proxy /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so ABI 5
+INKLING_TP4_ROCE preflight: ok
+roce bb81efad1fbb9078 on all nodes
+rank environments identical (7eaaaac78a46b35a)
+started inkling-tp4 on 4 ranks (run inkling-tp4-20261125104359-3208301); API on 127.0.0.1:8000 of rank 0 once ready (docker logs -f inkling-tp4-r0)
+PASS B5dec-repro "geomean_tok_s": 144.7
+== 2026-11-25T10:52:03+01:00 warm-up
+prose      c1  aggregate   108.2 tok/s  per-stream  113.5  ttft 0.095 s  failed 0
+== 2026-11-25T10:52:10+01:00 speedbench quick
+B5dec: {"failed": 0, "valid_decode": 30, "ALL": {"n": 30, "median_tok_s": 142.91, "geomean_tok_s": 146.41, "aggregate_tok_s": 141.14, "median_ttft_ms": 82.5, "truncated_frac": 0.967, "reasoning_token_frac": 0.744, "reasoning_char_frac": 0.801, "median_step_ms": 22.97, "median_tokens_per_step": 3.279, "steps_source": "response", "median_accept_rate": 0.327, "median_draft_per_step": 7.0}, "sentinel": {"n": 2, "identical_text": 2, "drift_pct_identical": -1.059, "drift_pct_all": -1.059}}
+== 2026-11-25T10:52:56+01:00 decode table
+prose      c1  aggregate   113.1 tok/s  per-stream  116.7  ttft 0.093 s  failed 0
+prose      c4  aggregate   263.4 tok/s  per-stream   69.6  ttft 0.158 s  failed 0
+prose      c16 aggregate   544.3 tok/s  per-stream   37.1  ttft 0.315 s  failed 0
+code       c1  aggregate   128.3 tok/s  per-stream  144.6  ttft 0.095 s  failed 0
+code       c4  aggregate   272.2 tok/s  per-stream   74.4  ttft 0.152 s  failed 0
+code       c16 aggregate   568.0 tok/s  per-stream   41.6  ttft 0.341 s  failed 0
+| prompt type | c1 | c4 | c16 |
+|---|---:|---:|---:|
+| prose | 116.7 | 263.4 (69.6) | 544.3 (37.1) |
+| code | 144.6 | 272.2 (74.4) | 568.0 (41.6) |
+== 2026-11-25T10:54:02+01:00 thinking c8
+{"label": "B5dec-c8", "started": "2026-11-25T10:54:02+01:00", "concurrency": 8, "requests": 16, "failed": 0, "max_tokens": 2048, "temperature": 0.8, "effort": "high", "wall_s": 56.51, "completion_tokens": 29255, "aggregate_tok_s": 517.7, "per_request_decode_tok_s_median": 74.9, "ttft_median_s": 0.36, "length_finishes": 12}
+== 2026-11-25T10:54:59+01:00 quality guard
+B5dec-guard: {"failed": 0, "valid_decode": 30, "ALL": {"n": 30, "median_tok_s": 143.18, "geomean_tok_s": 146.55, "aggregate_tok_s": 141.37, "median_ttft_ms": 82.3, "truncated_frac": 0.967, "reasoning_token_frac": 0.744, "reasoning_char_frac": 0.802, "median_step_ms": 22.52, "median_tokens_per_step": 3.179, "steps_source": "stream"}, "sentinel": {"n": 2, "identical_text": 2, "drift_pct_identical": 1.235, "drift_pct_all": 1.235}}
+B5dec-guard: quality guard 30/30 passed
+min MemAvailable GiB r0..r3: 12.15 13.78 13.63 14.12
+== 2026-11-25T10:55:55+01:00 done
+ARM B5dec DONE 2026-11-25T09:55:55Z

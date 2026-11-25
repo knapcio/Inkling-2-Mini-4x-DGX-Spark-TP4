@@ -1,0 +1,20 @@
+== 2026-11-25T09:47:50+01:00 warm-up
+prose      c1  aggregate   108.2 tok/s  per-stream  111.8  ttft 0.086 s  failed 0
+wrote /home/knapcio/inkling-tp4/results/B3roce/B3roce-warm.json
+== 2026-11-25T09:47:56+01:00 speedbench quick
+B3roce: {"failed": 0, "valid_decode": 30, "ALL": {"n": 30, "median_tok_s": 123.07, "geomean_tok_s": 129.62, "aggregate_tok_s": 126.82, "median_ttft_ms": 83.9, "truncated_frac": 0.967, "reasoning_token_frac": 0.805, "reasoning_char_frac": 0.852, "median_step_ms": 24.31, "median_tokens_per_step": 2.972, "steps_source": "response", "median_accept_rate": 0.2817, "median_draft_per_step": 7.0}, "sentinel": {"n": 2, "identical_text": 2, "drift_pct_identical": 0.193, "drift_pct_all": 0.193}}
+wrote /home/knapcio/inkling-tp4/results/B3roce/B3roce-sbquick.json (0.8 min)
+== 2026-11-25T09:48:46+01:00 decode table
+prose      c1  aggregate   115.4 tok/s  per-stream  122.8  ttft 0.101 s  failed 0
+prose      c4  aggregate   252.0 tok/s  per-stream   68.9  ttft 0.166 s  failed 0
+prose      c16 aggregate   521.3 tok/s  per-stream   35.4  ttft 0.327 s  failed 0
+code       c1  aggregate   119.0 tok/s  per-stream  116.5  ttft 0.099 s  failed 0
+code       c4  aggregate   249.0 tok/s  per-stream   71.7  ttft 0.178 s  failed 0
+code       c16 aggregate   558.4 tok/s  per-stream   39.5  ttft 0.377 s  failed 0
+wrote /home/knapcio/inkling-tp4/results/B3roce/B3roce-decode.json
+| prompt type | c1 | c4 | c16 |
+|---|---:|---:|---:|
+| prose | 122.8 | 252.0 (68.9) | 521.3 (35.4) |
+| code | 116.5 | 249.0 (71.7) | 558.4 (39.5) |
+min MemAvailable GiB r0..r3: 12.65 13.76 14.11 14
+== 2026-11-25T09:49:54+01:00 done

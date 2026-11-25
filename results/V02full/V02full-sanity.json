@@ -1,0 +1,96 @@
+{
+ "url": "http://127.0.0.1:8000",
+ "results": [
+  {
+   "check": "chat: 17*23",
+   "pass": true,
+   "answer": "391",
+   "completion_tokens": 44
+  },
+  {
+   "check": "chat: capital + river",
+   "pass": true,
+   "answer": "Warsaw is the capital of Poland, and the Vistula River flows through it."
+  },
+  {
+   "check": "effort none",
+   "pass": true,
+   "completion_tokens": 249,
+   "reasoning_chars": 515,
+   "prompt_tokens": 46,
+   "answer": "visible by exactly one: 142 + 90 − 2·12 = 208  \n\nAnswer: 208"
+  },
+  {
+   "check": "effort low",
+   "pass": true,
+   "completion_tokens": 237,
+   "reasoning_chars": 455,
+   "prompt_tokens": 48,
+   "answer": "y both: 12.  \nXOR count: 142 + 90 − 2·12 = 208.\n\nAnswer: 208"
+  },
+  {
+   "check": "effort medium",
+   "pass": true,
+   "completion_tokens": 273,
+   "reasoning_chars": 512,
+   "prompt_tokens": 48,
+   "answer": "visible by exactly one: 142 + 90 − 2·12 = 208  \n\nAnswer: 208"
+  },
+  {
+   "check": "effort high",
+   "pass": true,
+   "completion_tokens": 274,
+   "reasoning_chars": 531,
+   "prompt_tokens": 48,
+   "answer": "Divisible by exactly one: 142 + 90 − 2·12 = 208\n\nAnswer: 208"
+  },
+  {
+   "check": "effort: none <= high",
+   "pass": true,
+   "lengths": {
+    "none": 249,
+    "low": 237,
+    "medium": 273,
+    "high": 274
+   }
+  },
+  {
+   "check": "tool call",
+   "pass": true,
+   "finish": "tool_calls",
+   "calls": [
+    {
+     "name": "get_weather",
+     "arguments": "{\"city\": \"Krakow\", \"unit\": \"c\"}"
+    }
+   ]
+  },
+  {
+   "check": "tool result -> answer",
+   "pass": true,
+   "answer": "Right now in Krakow: 7°C with light rain."
+  },
+  {
+   "check": "json_schema output",
+   "pass": true,
+   "parsed": {
+    "city": "Gdańsk",
+    "population_millions": 1.0,
+    "landmarks": [
+     "Long Market",
+     "Main Town Hall",
+     "St. Mary's Church",
+     "Uphagen Chapel"
+    ]
+   }
+  },
+  {
+   "check": "needle 120K",
+   "pass": true,
+   "prompt_tokens": 120097,
+   "seconds": 26.9,
+   "expected": "MEADOW-FALCON-0347",
+   "answer": "MEADOW-FALCON-0347"
+  }
+ ]
+}

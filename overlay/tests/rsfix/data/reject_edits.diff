@@ -1,0 +1,129 @@
+--- stock/speculative_sampling_classic_kernel
++++ rsfix/speculative_sampling_classic_kernel
+@@ -196,3 +196,9 @@
+-    # Pass 2: CDF. Degenerate residual (norm_sum == 0, i.e. p == q everywhere on
+-    # rejection) leaves the cumsum at 0 <= target_u, so final_token falls back to
+-    # VOCAB_SIZE - 1; acceptable since this case is numerically near-impossible.
++    # Pass 2: CDF. rsfix: only in-range lanes with positive residual mass can be
++    # selected. target_u comes from norm_sum, a per-tile tl.sum (or the block-verification
++    # residual mass, a sum over BLOCK_REDUCE tiles), while the scan below is a tl.cumsum:
++    # the scan can end below target_u, and without the lane condition a zero-mass lane
++    # (padded vocabulary rows, lanes >= VOCAB_SIZE) could be the first lane above it.
++    # No match (target_u at or past the scan's end) emits the last lane with positive
++    # residual mass; a residual with no positive lane at all (norm_sum == 0) emits the
++    # last lane with positive target mass. Only a target row with no positive entry
++    # (not a distribution) keeps the stock VOCAB_SIZE - 1.
+@@ -202,0 +209,4 @@
++    # Largest lane key seen: VOCAB_SIZE + v for a positive-residual lane v, v for a
++    # positive-target lane, -1 for neither. The scan reaches the end of the row exactly
++    # when no lane matches, so the key then covers the whole row.
++    fallback_key = -1
+@@ -225 +235,2 @@
+-            candidates_mask = total_cumsum > target_u
++            positive = mask & (val > 0.0)
++            candidates_mask = (total_cumsum > target_u) & positive
+@@ -232,0 +244,7 @@
++            lane_key = tl.where(
++                positive,
++                VOCAB_SIZE + v_offsets,
++                tl.where(mask & (p_val > 0.0), v_offsets, -1),
++            )
++            fallback_key = tl.maximum(fallback_key, tl.max(lane_key, axis=0))
++
+@@ -234,0 +253,6 @@
++    if found == 0:
++        if fallback_key >= VOCAB_SIZE:
++            final_token = fallback_key - VOCAB_SIZE
++        elif fallback_key >= 0:
++            final_token = fallback_key
++
+--- stock/_split_residual_tile
++++ rsfix/_split_residual_tile
+@@ -19 +19,2 @@
+-    full-vocabulary passes above, including the non-probability guard on q."""
++    full-vocabulary passes above, including the non-probability guard on q.
++    rsfix: also returns the target tile (the degenerate-residual fallback reads it)."""
+@@ -35 +36 @@
+-    return val
++    return val, p_val
+--- stock/_split_sum_kernel
++++ rsfix/_split_sum_kernel
+@@ -12,0 +13 @@
++    Fallback,
+@@ -60,2 +61,5 @@
+-        # The stock fallback when no tile matches (degenerate residual).
+-        tl.store(Result + pid, VOCAB_SIZE - 1)
++        # rsfix: VOCAB_SIZE = "no tile matched" (every match index is below it); the
++        # fallback key starts at -1 = "no positive lane". Both are written here, one
++        # launch before _split_cdf_kernel updates them, so they reset in stream order.
++        tl.store(Result + pid, VOCAB_SIZE)
++        tl.store(Fallback + pid, -1)
+@@ -63 +67 @@
+-    val = _split_residual_tile(
++    val, _ = _split_residual_tile(
+--- stock/_split_cdf_kernel
++++ rsfix/_split_cdf_kernel
+@@ -11,0 +12 @@
++    Fallback,
+@@ -34 +35,8 @@
+-    all tiles with an atomic reproduces the stock token."""
++    all tiles with an atomic reproduces the stock token.
++
++    rsfix: a lane matches only when it is in range and has positive residual mass, and
++    each tile also posts its largest lane key (VOCAB_SIZE + v for the last positive-
++    residual lane v, else v for the last positive-target lane, else -1) with an atomic
++    maximum. When no tile matched (the scan ended at or below target_u), the last
++    arrival emits the row's last positive-residual lane, or, for a residual with no
++    positive lane, the last positive-target lane."""
+@@ -73 +81 @@
+-    val = _split_residual_tile(
++    val, p_val = _split_residual_tile(
+@@ -90 +98,4 @@
+-    candidates_mask = total_cumsum > target_u
++    v_offsets = v_start + tl.arange(0, BLOCK_V)
++    mask = v_offsets < VOCAB_SIZE
++    positive = mask & (val > 0.0)
++    candidates_mask = (total_cumsum > target_u) & positive
+@@ -93,0 +105,8 @@
++    lane_key = tl.where(
++        positive,
++        VOCAB_SIZE + v_offsets,
++        tl.where(mask & (p_val > 0.0), v_offsets, -1),
++    )
++    tile_key = tl.max(lane_key, axis=0)
++    if tile_key >= 0:
++        tl.atomic_max(Fallback + pid, tile_key, sem="relaxed", scope="gpu")
+@@ -95 +114 @@
+-    # Arrival counter (acq_rel RMW, gpu scope): each program's atomic minimum above is
++    # Arrival counter (acq_rel RMW, gpu scope): each program's atomics above are
+@@ -103,0 +123,9 @@
++        if final_token >= VOCAB_SIZE:
++            # No tile matched: the last positive-residual lane, else the last
++            # positive-target lane; a row with neither keeps the stock VOCAB_SIZE - 1.
++            key = tl.atomic_add(Fallback + pid, 0, sem="relaxed", scope="gpu")
++            final_token = tl.where(
++                key >= VOCAB_SIZE,
++                key - VOCAB_SIZE,
++                tl.where(key >= 0, key, VOCAB_SIZE - 1),
++            )
+--- stock/_split_scratch
++++ rsfix/_split_scratch
+@@ -2,3 +2,3 @@
+-    """Tile sums, sampled token and arrival counters, one set per (device, stream, tile
+-    count), made once and never replaced, so pointers captured in a CUDA graph stay
+-    valid. Returns ``None`` while capturing until an eager launch has made the set,
++    """Tile sums, sampled token, arrival counters and (rsfix) the fallback lane key, one
++    set per (device, stream, tile count), made once and never replaced, so pointers
++    captured in a CUDA graph stay valid. Returns ``None`` while capturing until an eager launch has made the set,
+@@ -18,0 +19,2 @@
++                # rsfix: written by _split_sum_kernel before every use.
++                torch.empty((rows,), dtype=torch.int32, device=device),
+--- stock/_chain_speculative_sampling_split
++++ rsfix/_chain_speculative_sampling_split
+@@ -24 +24 @@
+-    tile_sums, result, arrived = scratch
++    tile_sums, result, arrived, fallback = scratch
+@@ -56,0 +57 @@
++        fallback,
+@@ -70,0 +72 @@
++        fallback,

@@ -1,0 +1,1 @@
+{"label": "B3roce-c8", "started": "2026-11-25T09:50:08+01:00", "concurrency": 8, "requests": 16, "failed": 0, "max_tokens": 2048, "temperature": 0.8, "effort": "high", "wall_s": 61.46, "completion_tokens": 28367, "aggregate_tok_s": 461.5, "per_request_decode_tok_s_median": 67.3, "ttft_median_s": 0.52, "length_finishes": 11}

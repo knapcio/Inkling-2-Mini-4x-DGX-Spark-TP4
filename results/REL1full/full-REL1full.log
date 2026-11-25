@@ -1,0 +1,60 @@
+== 2026-11-25T12:17:00+01:00 speedbench full
+REL1full: {"failed": 0, "valid_decode": 73, "ALL": {"n": 73, "median_tok_s": 141.59, "geomean_tok_s": 142.77, "aggregate_tok_s": 137.87, "median_ttft_ms": 83.6, "truncated_frac": 0.945, "reasoning_token_frac": 0.655, "reasoning_char_frac": 0.719, "median_step_ms": 21.87, "median_tokens_per_step": 3.086, "steps_source": "stream"}, "sentinel": {"n": 4, "identical_text": 4, "drift_pct_identical": -0.2, "drift_pct_all": -0.2}}
+wrote /home/knapcio/inkling-tp4/results/REL1full/REL1full-speedbench.json (2.6 min)
+== 2026-11-25T12:19:36+01:00 decode table
+prose      c1  aggregate   118.6 tok/s  per-stream  125.6  ttft 0.083 s  failed 0
+prose      c2  aggregate   178.5 tok/s  per-stream   93.1  ttft 0.126 s  failed 0
+prose      c4  aggregate   275.5 tok/s  per-stream   76.0  ttft 0.165 s  failed 0
+prose      c8  aggregate   377.5 tok/s  per-stream   49.9  ttft 0.216 s  failed 0
+prose      c16 aggregate   544.4 tok/s  per-stream   37.1  ttft 0.305 s  failed 0
+code       c1  aggregate   130.1 tok/s  per-stream  143.1  ttft 0.097 s  failed 0
+code       c2  aggregate   171.3 tok/s  per-stream   91.7  ttft 0.118 s  failed 0
+code       c4  aggregate   274.4 tok/s  per-stream   75.7  ttft 0.152 s  failed 0
+code       c8  aggregate   400.8 tok/s  per-stream   56.6  ttft 0.223 s  failed 0
+code       c16 aggregate   557.0 tok/s  per-stream   42.1  ttft 0.345 s  failed 0
+structured c1  aggregate   152.7 tok/s  per-stream  159.8  ttft 0.097 s  failed 0
+structured c2  aggregate   214.8 tok/s  per-stream  114.6  ttft 0.126 s  failed 0
+structured c4  aggregate   294.3 tok/s  per-stream   79.8  ttft 0.16 s  failed 0
+structured c8  aggregate   411.8 tok/s  per-stream   57.6  ttft 0.194 s  failed 0
+structured c16 aggregate   624.2 tok/s  per-stream   44.0  ttft 0.38 s  failed 0
+json       c1  aggregate   157.9 tok/s  per-stream  164.8  ttft 0.106 s  failed 0
+json       c2  aggregate   209.6 tok/s  per-stream  111.1  ttft 0.117 s  failed 0
+json       c4  aggregate   306.2 tok/s  per-stream   82.4  ttft 0.165 s  failed 0
+json       c8  aggregate   435.8 tok/s  per-stream   63.0  ttft 0.271 s  failed 0
+json       c16 aggregate   615.1 tok/s  per-stream   44.8  ttft 0.418 s  failed 0
+wrote /home/knapcio/inkling-tp4/results/REL1full/REL1full-decode.json
+| prompt type | c1 | c2 | c4 | c8 | c16 |
+|---|---:|---:|---:|---:|---:|
+| prose | 125.6 | 178.5 (93.1) | 275.5 (76.0) | 377.5 (49.9) | 544.4 (37.1) |
+| code | 143.1 | 171.3 (91.7) | 274.4 (75.7) | 400.8 (56.6) | 557.0 (42.1) |
+| structured | 159.8 | 214.8 (114.6) | 294.3 (79.8) | 411.8 (57.6) | 624.2 (44.0) |
+| json | 164.8 | 209.6 (111.1) | 306.2 (82.4) | 435.8 (63.0) | 615.1 (44.8) |
+== 2026-11-25T12:22:40+01:00 thinking load
+{"label": "REL1full-c1", "started": "2026-11-25T12:22:40+01:00", "concurrency": 1, "requests": 3, "failed": 0, "max_tokens": 2048, "temperature": 0.8, "effort": "high", "wall_s": 35.1, "completion_tokens": 6144, "aggregate_tok_s": 175.0, "per_request_decode_tok_s_median": 174.0, "ttft_median_s": 0.11, "length_finishes": 3}
+{"label": "REL1full-c8", "started": "2026-11-25T12:23:16+01:00", "concurrency": 8, "requests": 16, "failed": 0, "max_tokens": 4096, "temperature": 0.8, "effort": "high", "wall_s": 98.07, "completion_tokens": 52217, "aggregate_tok_s": 532.5, "per_request_decode_tok_s_median": 79.8, "ttft_median_s": 0.35, "length_finishes": 11}
+{"label": "REL1full-c24", "started": "2026-11-25T12:24:54+01:00", "concurrency": 24, "requests": 48, "failed": 0, "max_tokens": 4096, "temperature": 0.8, "effort": "high", "wall_s": 186.65, "completion_tokens": 165462, "aggregate_tok_s": 886.5, "per_request_decode_tok_s_median": 42.9, "ttft_median_s": 0.74, "length_finishes": 37}
+== 2026-11-25T12:28:00+01:00 longctx
+128K     130922.0 32.034     4087.0      16.143       None      111.4 [91.2, 136.0]      -         -
+wrote /home/knapcio/inkling-tp4/results/REL1full/REL1full-longctx.json (2.8 min)
+== 2026-11-25T12:30:49+01:00 quality guard
+REL1full-guard: {"failed": 0, "valid_decode": 30, "ALL": {"n": 30, "median_tok_s": 143.25, "geomean_tok_s": 150.42, "aggregate_tok_s": 144.71, "median_ttft_ms": 83.4, "truncated_frac": 0.967, "reasoning_token_frac": 0.755, "reasoning_char_frac": 0.811, "median_step_ms": 21.77, "median_tokens_per_step": 3.112, "steps_source": "stream"}, "sentinel": {"n": 2, "identical_text": 2, "drift_pct_identical": 0.155, "drift_pct_all": 0.155}}
+REL1full-guard: quality guard 30/30 passed
+wrote /home/knapcio/inkling-tp4/results/REL1full/REL1full-guard.json (0.9 min)
+== 2026-11-25T12:31:44+01:00 sanity
+chat: 17*23                  PASS  {"answer": "391", "completion_tokens": 44}
+chat: capital + river        PASS  {"answer": "Warsaw is the capital of Poland, and the Vistula River flows through it."}
+effort none                  PASS  {"completion_tokens": 249, "reasoning_chars": 515, "prompt_tokens": 46, "answer": "visible by exactly one: 142 + 90 − 2·12 = 208  \n\nAnswer: 208"}
+effort low                   PASS  {"completion_tokens": 237, "reasoning_chars": 455, "prompt_tokens": 48, "answer": "y both: 12.  \nXOR count: 142 + 90 − 2·12 = 208.\n\nAnswer: 208"}
+effort medium                PASS  {"completion_tokens": 273, "reasoning_chars": 512, "prompt_tokens": 48, "answer": "visible by exactly one: 142 + 90 − 2·12 = 208  \n\nAnswer: 208"}
+effort high                  PASS  {"completion_tokens": 274, "reasoning_chars": 531, "prompt_tokens": 48, "answer": "Divisible by exactly one: 142 + 90 − 2·12 = 208\n\nAnswer: 208"}
+effort: none <= high         PASS  {"lengths": {"none": 249, "low": 237, "medium": 273, "high": 274}}
+tool call                    PASS  {"finish": "tool_calls", "calls": [{"name": "get_weather", "arguments": "{\"city\": \"Krakow\", \"unit\": \"c\"}"}]}
+tool result -> answer        PASS  {"answer": "Right now in Krakow: 7°C with light rain."}
+json_schema output           PASS  {"parsed": {"city": "Gdańsk", "population_millions": 1.0, "landmarks": ["Long Market", "Main Town Hall", "St. Mary's Church", "Uphagen Chapel"]}}
+needle 120K                  PASS  {"prompt_tokens": 120097, "seconds": 29.5, "expected": "MEADOW-FALCON-0347", "answer": "MEADOW-FALCON-0347"}
+11 / 11 passed
+needle 240K                  PASS  {"prompt_tokens": 240104, "seconds": 65.6, "expected": "WILLOW-FALCON-3624", "answer": "WILLOW-FALCON-3624"}
+1 / 1 passed
+== 2026-11-25T12:33:29+01:00 done
+worst-case MemAvailable GiB r0..r3: 12.7 13.79 14.11 13.57
+FULL REL1full DONE 2026-11-25T11:33:29Z

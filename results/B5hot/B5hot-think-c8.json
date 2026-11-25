@@ -1,0 +1,1 @@
+{"label": "B5hot-c8", "started": "2026-11-25T11:02:25+01:00", "concurrency": 8, "requests": 16, "failed": 0, "max_tokens": 2048, "temperature": 0.8, "effort": "high", "wall_s": 58.95, "completion_tokens": 31907, "aggregate_tok_s": 541.2, "per_request_decode_tok_s_median": 71.7, "ttft_median_s": 0.41, "length_finishes": 14}

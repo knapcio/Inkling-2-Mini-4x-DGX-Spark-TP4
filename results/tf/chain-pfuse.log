@@ -1,0 +1,7 @@
+== 2026-11-25T11:34:11Z control: stock TP4, eager prefill
+RESULT eager-vs-stock {"tokens": 15680, "mean_abs_dlogprob": 0.3248, "p99": 5.6952, "max": 21.8662, "nll_per_tok_A": 2.53716, "nll_per_tok_B": 2.53158}
+== 2026-11-25T11:38:12Z B8 = release + pfuse
+RESULT pfuse-vs-stock {"tokens": 15680, "mean_abs_dlogprob": 0.45131, "p99": 6.976, "max": 20.8017, "nll_per_tok_A": 2.53716, "nll_per_tok_B": 2.53407}
+30 prompts x 256 tokens at c1
+RESULT gen c1 ref-vs-B8 {"prompts": 30, "identical": 1, "median_common_prefix": 38, "tokens_compared": 1298, "mean_abs_dlogprob": 0.01708, "p99": 0.1908, "max": 0.4676, "divergence_chosen_lp_gaps": [0.024, 0.057, 0.077, 0.052, 0.036, 0.044, 0.096, 0.084, 0.144, 0.119, 0.071, 0.106, 0.02, 0.086, 0.122, 0.05, 0.319, 0.106, 0.078, 0.23, 0.036, 0.089, 0.108, 0.163, 0.096, 0.123, 0.064, 0.193, 0.561]}
+CHAIN DONE 2026-11-25T11:47:40Z

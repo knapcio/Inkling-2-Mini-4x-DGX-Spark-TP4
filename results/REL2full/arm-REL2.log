@@ -1,0 +1,28 @@
+ARM REL2 start 2026-11-25T13:48:27Z env:  flags: 
+stopped inkling-tp4 on all ranks
+overlay ef08dde7bea9e160 on all nodes
+proxy present: /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+INKLING_TP4_ROCE preflight: b12x /opt/sglang/lib/python3.12/site-packages/flashinfer/experimental/b12x/comm/roce/__init__.py API 1 proxy /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so ABI 5
+INKLING_TP4_ROCE preflight: ok
+proxy present: /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+INKLING_TP4_ROCE preflight: b12x /opt/sglang/lib/python3.12/site-packages/flashinfer/experimental/b12x/comm/roce/__init__.py API 1 proxy /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so ABI 5
+INKLING_TP4_ROCE preflight: ok
+proxy present: /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+INKLING_TP4_ROCE preflight: b12x /opt/sglang/lib/python3.12/site-packages/flashinfer/experimental/b12x/comm/roce/__init__.py API 1 proxy /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so ABI 5
+INKLING_TP4_ROCE preflight: ok
+proxy present: /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+INKLING_TP4_ROCE preflight: b12x /opt/sglang/lib/python3.12/site-packages/flashinfer/experimental/b12x/comm/roce/__init__.py API 1 proxy /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so ABI 5
+INKLING_TP4_ROCE preflight: ok
+roce bb81efad1fbb9078 on all nodes
+rank environments identical (6349630a0739e399)
+started inkling-tp4 on 4 ranks (run inkling-tp4-20261125144935-3839220); API on 127.0.0.1:8000 of rank 0 once ready (docker logs -f inkling-tp4-r0)
+PASS REL2-repro "geomean_tok_s": 159.93
+ARM REL2 DONE 2026-11-25T13:52:35Z

@@ -1,0 +1,50 @@
+ARM K1certchk start 2026-11-25T13:01:47Z env: INKLING_CERT_HEAD=check INKLING_VERIFY_CAP=dfpolicy:/opt/inkling-overlay/inkling_vcap/policies/df-SLDF2x.json,bsmax=8,rowscale=0.5 INKLING_VERIFY_CAP_LOG_EVERY=0 INKLING_CERT_TP=1 INKLING_VERIFY_CAP_BV=mask INKLING_VERIFY_CAP_REMAP=1  flags: 
+stopped inkling-tp4 on all ranks
+overlay 1b60651f356e2415 on all nodes
+proxy present: /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+INKLING_TP4_ROCE preflight: b12x /opt/sglang/lib/python3.12/site-packages/flashinfer/experimental/b12x/comm/roce/__init__.py API 1 proxy /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so ABI 5
+INKLING_TP4_ROCE preflight: ok
+proxy present: /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+INKLING_TP4_ROCE preflight: b12x /opt/sglang/lib/python3.12/site-packages/flashinfer/experimental/b12x/comm/roce/__init__.py API 1 proxy /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so ABI 5
+INKLING_TP4_ROCE preflight: ok
+proxy present: /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+INKLING_TP4_ROCE preflight: b12x /opt/sglang/lib/python3.12/site-packages/flashinfer/experimental/b12x/comm/roce/__init__.py API 1 proxy /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so ABI 5
+INKLING_TP4_ROCE preflight: ok
+proxy present: /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+INKLING_TP4_ROCE preflight: b12x /opt/sglang/lib/python3.12/site-packages/flashinfer/experimental/b12x/comm/roce/__init__.py API 1 proxy /root/.cache/b12x-roce/roce_proxy-9725ab7a7a7e14d7.so ABI 5
+INKLING_TP4_ROCE preflight: ok
+roce bb81efad1fbb9078 on all nodes
+rank environments identical (e2f81aa0d4d0dbac)
+started inkling-tp4 on 4 ranks (run inkling-tp4-20261125140255-3711621); API on 127.0.0.1:8000 of rank 0 once ready (docker logs -f inkling-tp4-r0)
+PASS K1certchk-repro "geomean_tok_s": 151.23
+== 2026-11-25T14:06:37+01:00 warm-up
+prose      c1  aggregate   107.5 tok/s  per-stream  111.7  ttft 0.096 s  failed 0
+== 2026-11-25T14:06:43+01:00 speedbench quick
+K1certchk: {"failed": 0, "valid_decode": 30, "ALL": {"n": 30, "median_tok_s": 146.68, "geomean_tok_s": 152.25, "aggregate_tok_s": 147.34, "median_ttft_ms": 83.5, "truncated_frac": 0.967, "reasoning_token_frac": 0.746, "reasoning_char_frac": 0.804, "median_step_ms": 21.33, "median_tokens_per_step": 3.149, "steps_source": "response", "median_accept_rate": 0.3084, "median_draft_per_step": 7.0}, "sentinel": {"n": 2, "identical_text": 2, "drift_pct_identical": -0.707, "drift_pct_all": -0.707}}
+== 2026-11-25T14:07:28+01:00 decode table
+prose      c1  aggregate   113.5 tok/s  per-stream  119.8  ttft 0.098 s  failed 0
+prose      c4  aggregate   292.4 tok/s  per-stream   81.5  ttft 0.161 s  failed 0
+prose      c16 aggregate   589.9 tok/s  per-stream   39.4  ttft 0.301 s  failed 0
+code       c1  aggregate   134.2 tok/s  per-stream  152.6  ttft 0.098 s  failed 0
+code       c4  aggregate   296.0 tok/s  per-stream   80.3  ttft 0.151 s  failed 0
+code       c16 aggregate   634.5 tok/s  per-stream   45.0  ttft 0.358 s  failed 0
+| prompt type | c1 | c4 | c16 |
+|---|---:|---:|---:|
+| prose | 119.8 | 292.4 (81.5) | 589.9 (39.4) |
+| code | 152.6 | 296.0 (80.3) | 634.5 (45.0) |
+== 2026-11-25T14:08:29+01:00 thinking c8
+{"label": "K1certchk-c8", "started": "2026-11-25T14:08:29+01:00", "concurrency": 8, "requests": 16, "failed": 0, "max_tokens": 2048, "temperature": 0.8, "effort": "high", "wall_s": 56.66, "completion_tokens": 30409, "aggregate_tok_s": 536.7, "per_request_decode_tok_s_median": 75.2, "ttft_median_s": 0.35, "length_finishes": 13}
+== 2026-11-25T14:09:26+01:00 quality guard
+K1certchk-guard: {"failed": 0, "valid_decode": 30, "ALL": {"n": 30, "median_tok_s": 146.58, "geomean_tok_s": 152.76, "aggregate_tok_s": 148.0, "median_ttft_ms": 85.2, "truncated_frac": 0.967, "reasoning_token_frac": 0.746, "reasoning_char_frac": 0.804, "median_step_ms": 20.69, "median_tokens_per_step": 3.03, "steps_source": "stream"}, "sentinel": {"n": 2, "identical_text": 2, "drift_pct_identical": 1.017, "drift_pct_all": 1.017}}
+K1certchk-guard: quality guard 30/30 passed
+min MemAvailable GiB r0..r3: 14.17 15.28 15.6 14.77
+== 2026-11-25T14:10:20+01:00 done
+ARM K1certchk DONE 2026-11-25T13:10:22Z

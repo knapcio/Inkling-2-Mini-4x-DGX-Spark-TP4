@@ -1,0 +1,27 @@
+== 2026-11-25T13:01:47Z K1: cert check mode
+RESULT K1 active: 4 errors: 0
+      1 [inkling_cert pid=75] steps certified 4571 (tiles/step 8.7), not certifiable 0, not eligible 2; check: 4571 steps, 36792 rows, mismatches 0
+      1 [inkling_cert pid=75] steps certified 4571 (tiles/step 10.5), not certifiable 0, not eligible 2; check: 4571 steps, 36792 rows, mismatches 0
+      1 [inkling_cert pid=75] steps certified 3999 (tiles/step 9.8), not certifiable 0, not eligible 2; check: 3999 steps, 31992 rows, mismatches 0
+      1 [inkling_cert pid=75] steps certified 3999 (tiles/step 8.8), not certifiable 0, not eligible 2; check: 3999 steps, 31992 rows, mismatches 0
+      1 [inkling_cert pid=75] steps certified 1999 (tiles/step 9.9), not certifiable 0, not eligible 2; check: 1999 steps, 15992 rows, mismatches 0
+      1 [inkling_cert pid=75] steps certified 1999 (tiles/step 9.1), not certifiable 0, not eligible 2; check: 1999 steps, 15992 rows, mismatches 0
+      1 [inkling_cert pid=75] active (mode check, TP4 rank 2): 6-bit screen of the [50256x2304] head shard (ids 100512.., 50256 real), 89.5 MB per certified step, one [M, 2] all-gather of (T, H) per verify step; 42.9 s; deferred verify gather on
+      1 [inkling_cert pid=75] active (mode check, TP4 rank 1): 6-bit screen of the [50256x2304] head shard (ids 50256.., 50256 real), 89.5 MB per certified step, one [M, 2] all-gather of (T, H) per verify step; 42.9 s; deferred verify gather on
+      1 [inkling_cert pid=74] steps certified 4571 (tiles/step 17.2), not certifiable 0, not eligible 2; check: 4571 steps, 36792 rows, mismatches 0
+      1 [inkling_cert pid=74] steps certified 3999 (tiles/step 17.3), not certifiable 0, not eligible 2; check: 3999 steps, 31992 rows, mismatches 0
+      1 [inkling_cert pid=74] steps certified 1999 (tiles/step 17.2), not certifiable 0, not eligible 2; check: 1999 steps, 15992 rows, mismatches 0
+      1 [inkling_cert pid=74] active (mode check, TP4 rank 3): 6-bit screen of the [50256x2304] head shard (ids 150768.., 49290 real), 89.5 MB per certified step, one [M, 2] all-gather of (T, H) per verify step; 42.9 s; deferred verify gather on
+30 prompts x 256 tokens at c1
+RESULT K1 gen-vs-ref {"prompts": 30, "identical": 1, "median_common_prefix": 38, "tokens_compared": 1298, "mean_abs_dlogprob": 0.01702, "p99": 0.1921, "max": 0.4676, "divergence_chosen_lp_gaps": [0.024, 0.061, 0.077, 0.05, 0.033, 0.046, 0.096, 0.087, 0.145, 0.121, 0.071, 0.11, 0.02, 0.086, 0.122, 0.047, 0.319, 0.106, 0.078, 0.23, 0.036, 0.089, 0.108, 0.163, 0.097, 0.123, 0.005, 0.193, 0.571]}
+[inkling_cert pid=74] steps certified 3999 (tiles/step 17.3), not certifiable 0, not eligible 2; check: 3999 steps, 31992 rows, mismatches 0
+[inkling_cert pid=74] steps certified 4571 (tiles/step 17.2), not certifiable 0, not eligible 2; check: 4571 steps, 36792 rows, mismatches 0
+[inkling_cert pid=74] steps certified 6145 (tiles/step 17.4), not certifiable 0, not eligible 37; check: 6145 steps, 49384 rows, mismatches 0
+[inkling_cert pid=72] active (mode check, TP4 rank 0): 6-bit screen of the [50256x2304] head shard (ids 0.., 50256 real), 89.5 MB per certified step, one [M, 2] all-gather of (T, H) per verify step; 42.8 s; deferred verify gather on
+[inkling_cert pid=72] steps certified 1999 (tiles/step 15.8), not certifiable 0, not eligible 2; check: 1999 steps, 15992 rows, mismatches 0
+[inkling_cert pid=72] steps certified 3999 (tiles/step 15.4), not certifiable 0, not eligible 2; check: 3999 steps, 31992 rows, mismatches 0
+[inkling_cert pid=72] steps certified 4571 (tiles/step 15.3), not certifiable 0, not eligible 2; check: 4571 steps, 36792 rows, mismatches 0
+[inkling_cert pid=72] steps certified 6145 (tiles/step 15.7), not certifiable 0, not eligible 37; check: 6145 steps, 49384 rows, mismatches 0
+== 2026-11-25T13:11:18Z K2: cert production + cap (candidate final)
+RESULT K2 active: 4 errors: 0
+CHAIN DONE 2026-11-25T13:19:07Z

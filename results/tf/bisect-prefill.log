@@ -1,0 +1,16 @@
+== 2026-11-25T10:32:32Z lever bl: INKLING_PREFILL=bias_layout
+PASS BXbl-repro "geomean_tok_s": 150.1
+RESULT bl {"tokens": 15680, "mean_abs_dlogprob": 0.01403, "p99": 0.1992, "max": 4.7425, "nll_per_tok_A": 2.53716, "nll_per_tok_B": 2.53668}
+== 2026-11-25T10:36:50Z lever qkvr: INKLING_PREFILL=qkvr_split INKLING_PREFILL_QKVR_OUT=strided
+PASS BXqkvr-repro "geomean_tok_s": 149.56
+RESULT qkvr {"tokens": 15680, "mean_abs_dlogprob": 0.08305, "p99": 1.7174, "max": 15.2254, "nll_per_tok_A": 2.53716, "nll_per_tok_B": 2.53917}
+== 2026-11-25T10:41:07Z lever pfuse: INKLING_PFUSE=all
+PASS BXpfuse-repro "geomean_tok_s": 151.52
+RESULT pfuse {"tokens": 15680, "mean_abs_dlogprob": 0.45089, "p99": 6.9833, "max": 20.8017, "nll_per_tok_A": 2.53716, "nll_per_tok_B": 2.53483}
+== 2026-11-25T10:45:24Z lever prologue: INKLING_PROLOGUE=1
+PASS BXprologue-repro "geomean_tok_s": 150.04
+RESULT prologue {"tokens": 15680, "mean_abs_dlogprob": 0.01149, "p99": 0.1758, "max": 3.851, "nll_per_tok_A": 2.53716, "nll_per_tok_B": 2.53663}
+== 2026-11-25T10:49:42Z lever attn: INKLING_ATTN=prefill_swa,prefill_global INKLING_ATTN_GATE=1
+PASS BXattn-repro "geomean_tok_s": 142.26
+RESULT attn {"tokens": 15680, "mean_abs_dlogprob": 0.57277, "p99": 7.2893, "max": 21.562, "nll_per_tok_A": 2.53716, "nll_per_tok_B": 2.54206}
+BISECT DONE 2026-11-25T10:53:59Z

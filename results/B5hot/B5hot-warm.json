@@ -1,0 +1,53 @@
+{
+ "schema": "inkling-decode-table/1",
+ "label": "B5hot-warm",
+ "started": "2026-11-25T11:00:28+01:00",
+ "settings": {
+  "url": "http://127.0.0.1:8000",
+  "model": "inkling-2-mini",
+  "types": "prose",
+  "conc": [
+   1
+  ],
+  "rounds": "*:1",
+  "max_tokens": 256,
+  "temperature": 0.0,
+  "effort": "none",
+  "effort_field": "template",
+  "warmup": 2,
+  "prompt_set": "speedbench-v1.json"
+ },
+ "table": {
+  "prose": {
+   "1": {
+    "conc": 1,
+    "requests": 1,
+    "failed": 0,
+    "wall_s": 2.32,
+    "completion_tokens": 256,
+    "aggregate_tok_s": 110.3,
+    "per_stream_tok_s": 113.8,
+    "ttft_median_s": 0.08,
+    "length_finishes": 1
+   }
+  }
+ },
+ "requests": [
+  {
+   "ok": true,
+   "t_send": 0.001,
+   "t_end": 2.321,
+   "completion_tokens": 256,
+   "prompt_tokens": 34,
+   "finish": "length",
+   "error": null,
+   "ttft_s": 0.0798538780072704,
+   "decode_tok_s": 113.82529074267511,
+   "id": "prose-01",
+   "tag": 0,
+   "stream": 0,
+   "type": "prose",
+   "conc": 1
+  }
+ ]
+}
